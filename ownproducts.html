@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Product Cards</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f0dc;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px 20px 20px;
+            font-size: 2.8rem;
+            color: white;
+            background-color: #000;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 300;
+            font-size: 24px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .badge {
+            background-color: crimson;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 4px 8px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            border-radius: 4px;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 30px auto;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 1200px;
+            position: relative;
+        }
+
+        .left-pane {
+            flex: 1;
+            min-width: 300px;
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .left-pane img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 10px;
+        }
+
+        .left-pane h2 {
+            color: white;
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+
+        .right-pane {
+            flex: 2;
+            padding: 30px;
+            background-color: #fff;
+        }
+
+        .right-pane table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .right-pane td {
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .right-pane td:first-child {
+            font-weight: bold;
+            color: #6b4d36;
+            width: 200px;
+        }
+
+        .add-card {
+            width: 160px;
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .counter {
+            width: 160px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .counter button {
+            flex: 1;
+            padding: 10px 0;
+            font-size: 20px;
+            background-color: #eee;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .counter span {
+            flex: 1;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 18px;
+            background-color: white;
+        }
+
+        .book-slot-btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: 1px solid #333;
+            background: transparent;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .book-slot-btn:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .product-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Our Products</h1>
+
+<div class="product-container">
+    <div class="left-pane">
+        <div class="badge">New Launch</div>
+        <img src="images/facecream2.png" alt="Face Cream"/>
+        <h2>Face Cream</h2>
+    </div>
+    <!-- Add this inside <body>, preferably just above </body> -->
+<form id="orderForm" action="http://localhost:8080/order" method="POST">
+    <input type="hidden" name="productNames" id="productNames" />
+    <input type="hidden" name="quantities" id="quantities" />
+    <input type="hidden" name="total" id="total" />
+  </form>
+  
+    <div class="right-pane">
+        <table>
+            <tr>
+                <td>Face Cream (Type) :</td>
+                <td>Natural Herbal Moisturizing Cream</td>
+            </tr>
+            <tr>
+                <td>Benefits :</td>
+                <td>Deeply hydrates skin, reduces pigmentation, and improves skin elasticity.</td>
+            </tr>
+            <tr>
+                <td>Quantity Variants :</td>
+                <td>100ml</td>
+            </tr>
+            <tr>
+                <td>How to use? :</td>
+                <td>Apply gently on cleansed face twice a day for best results.</td>
+            </tr>
+            <tr>
+                <td>Ingredients :</td>
+                <td>Aloe Vera, Turmeric, Licorice Extract, Vitamin E</td>
+            </tr>
+            <tr>
+                <td>Recommended for :</td>
+                <td>All Skin Types</td>
+            </tr>
+            <tr>
+                <td>Extra Information :</td>
+                <td>Free from Sulphates, Parabens, and Artificial Fragrances. Dermatologically Tested.</td>
+            </tr>
+            <tr>
+                <td>Price :</td>
+                <td data-price="1500">₹1500</td>
+            </tr>
+        </table>
+        <div id="container1">
+            <button class="add-card" onclick="showCounter('container1', 'Face Cream', 1500)">Add Card</button>
+        </div>
+    </div>
+</div>
+
+<div class="product-container">
+    <div class="left-pane">
+        <img src="images/HairMask.png" alt="Hair Mask"/>
+        <h2>Hair Mask</h2>
+    </div>
+    <div class="right-pane">
+        <table>
+            <tr>
+                <td>Type :</td>
+                <td>Proprietary Ayurvedic Product</td>
+            </tr>
+            <tr>
+                <td>Benefits :</td>
+                <td>Strengthens hair, reduces hair fall</td>
+            </tr>
+            <tr>
+                <td>Quantity Variants :</td>
+                <td>200ml</td>
+            </tr>
+            <tr>
+                <td>How to use? :</td>
+                <td>Apply on clean, damp hair from root to tips, avoiding the scalp. Leave for 3 mins, then rinse.</td>
+            </tr>
+            <tr>
+                <td>Ingredients :</td>
+                <td>Bringharaj, Neem, Amla, Rosemary oil, Basil oil, Orange oil, Cedarwood oil</td>
+            </tr>
+            <tr>
+                <td>Recommended for :</td>
+                <td>Men & Women</td>
+            </tr>
+            <tr>
+                <td>Extra Information :</td>
+                <td>Non-greasy feel post wash</td>
+            </tr>
+            <tr>
+                <td>Price :</td>
+                <td data-price="750">₹750</td>
+            </tr>
+        </table>
+        <div id="container2">
+            <button class="add-card" onclick="showCounter('container2', 'Hair Mask', 750)">Add Card</button>
+        </div>
+    </div>
+</div>
+
+<div class="product-container">
+    <div class="left-pane">
+        <img src="images/shampoo_image.png" alt="Hair Shampoo"/>
+        <h2>Hair Shampoo</h2>
+    </div>
+    <div class="right-pane">
+        <table>
+            <tr>
+                <td>Hair Shampoo (Type) :</td>
+                <td>Ayurvedic Shampoo (Medicine)</td>
+            </tr>
+            <tr>
+                <td>Benefits :</td>
+                <td>Reduces Hair Fall in 4 washes – due to breakage.</td>
+            </tr>
+            <tr>
+                <td>Quantity Variants :</td>
+                <td>200ml</td>
+            </tr>
+            <tr>
+                <td>How to use? :</td>
+                <td>Apply 3 times a week Stylematch Shampoo,one day after one day, for best results.</td>
+            </tr>
+            <tr>
+                <td>Ingredients :</td>
+                <td>Bringha (Bringharaj) plant extract, Shikakai, Amla, Rosemary oil</td>
+            </tr>
+            <tr>
+                <td>Recommended for :</td>
+                <td>Men & Women</td>
+            </tr>
+            <tr>
+                <td>Extra Information :</td>
+                <td>100% free from Parabens, Synthetic Dyes & Synthetic Perfumes.</td>
+            </tr>
+            <tr>
+                <td>Price :</td>
+                <td data-price="1200">₹1200</td>
+            </tr>
+        </table>
+        <div id="container3">
+            <button class="add-card" onclick="showCounter('container3', 'Hair Shampoo', 1200)">Add Card</button>
+        </div>
+    </div>
+</div>
+
+<div class="product-container">
+    <div class="left-pane">
+        <img src="images/hairoil_image.png" alt="Hair Oil"/>
+        <h2>Hair Oil</h2>
+    </div>
+    <div class="right-pane">
+        <table>
+            <tr>
+                <td>Hair Oil (Type) :</td>
+                <td>100% Ayurvedic Hair Oil (Medicine)</td>
+            </tr>
+            <tr>
+                <td>Benefits :</td>
+                <td>Clinically proven to Grow new hair and Reduce hair fall.</td>
+            </tr>
+            <tr>
+                <td>Quantity Variants :</td>
+                <td>250ml</td>
+            </tr>
+            <tr>
+                <td>How to use? :</td>
+                <td>For best results use 3 times a week for 4 months. Post applying the oil leave it for 3–4 hours and then rinse it off using Indulekha Bringha Shampoo.</td>
+            </tr>
+            <tr>
+                <td>Ingredients :</td>
+                <td>Bringhraj, Svetakutaja, Amla, Virgin Coconut Oil</td>
+            </tr>
+            <tr>
+                <td>Recommended for :</td>
+                <td>Men & Women</td>
+            </tr>
+            <tr>
+                <td>Extra Information :</td>
+                <td>100% free from Parabens, Sulphates (Sulfates), Silicones, Synthetic Dyes & Synthetic Perfumes.</td>
+            </tr>
+            <tr>
+                <td>Price :</td>
+                <td data-price="1400">₹1400</td>
+            </tr>
+        </table>
+        <div id="container4">
+            <button class="add-card" onclick="showCounter('container4', 'Hair Oil', 1400)">Add Card</button>
+        </div>
+    </div>
+</div>
+
+<div style="text-align: center; margin: 40px 0;">
+    <button class="book-slot-btn" onclick="goToOrderPage()">BUY NOW</button>
+</div>
+
+<footer style="padding: 40px 20px; border-top: 1px solid #ccc; font-size: 0.9rem; color: #555;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1000px; margin: auto;">
+        <div>
+            <h4>Company</h4>
+            <a href="index.html#home">Home</a><br>
+            <a href="index.html#blog">Blog</a><br>
+            <a href="index.html#about">About Us</a><br>
+            <a href="index.html#privacy">Privacy Policy</a>
+        </div>
+        <div>
+            <h4>Our Services</h4>
+            <a href="index.html#events">Events</a><br>
+            <a href="index.html#services">Hair Care</a><br>
+            <a href="index.html#services">Skin Care</a><br>
+            <a href="index.html#services">Body Care</a>
+        </div>
+        <div>
+            <h4>Contact Us</h4>
+            <p>
+                Phone Number: +91 (996)-273-4416<br>
+                Location: 10,PT Rajan Rd,Sector 1,KK Nagar,Chennai,Tamil Nadu
+            </p>
+        </div>
+        <div style="text-align: right;">
+            <h4>Thanks for choosing</h4>
+            <p style="font-weight: bold; font-size: 1.1rem;">StyleMatch</p>
+            <div>
+                <img style="width: 70px; height: 70px; margin-right: 10px; filter: brightness(0) invert(0);"
+                     src="images/logo.png" alt="logo">
+            </div>
+        </div>
+    </div>
+    <p style="text-align: center; margin-top: 30px;">Copyright © 2025. StyleMatch. Love. All Rights Reserved</p>
+</footer>
+<script>
+    const counters = {};
+    let cartItems = [];
+
+    function showCounter(containerId, productName, price) {
+        counters[containerId] = 1;
+        updateCounter(containerId, productName, price);
+    }
+
+    function increment(containerId, productName, price) {
+        counters[containerId]++;
+        updateCounter(containerId, productName, price);
+    }
+
+    function decrement(containerId, productName, price) {
+        counters[containerId]--;
+        if (counters[containerId] <= 0) {
+            resetToAddButton(containerId, productName, price);
+        } else {
+            updateCounter(containerId, productName, price);
+        }
+    }
+
+    function updateCounter(containerId, productName, price) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = `
+        <div class="counter">
+            <button onclick="decrement('${containerId}', '${productName}', ${price})">-</button>
+            <span>${counters[containerId]}</span>
+            <button onclick="increment('${containerId}', '${productName}', ${price})">+</button>
+        </div>
+        `;
+        const existingItemIndex = cartItems.findIndex(item => item.name === productName);
+        if (existingItemIndex > -1) {
+            cartItems[existingItemIndex].quantity = counters[containerId];
+        } else {
+             cartItems.push({ name: productName, price: price, quantity: counters[containerId] });
+        }
+    }
+
+    function resetToAddButton(containerId, productName, price) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = `
+        <button class="add-card" onclick="showCounter('${containerId}', '${productName}', ${price})">Add Card</button>
+        `;
+        delete counters[containerId];
+        cartItems = cartItems.filter(item => item.name !== productName);
+    }
+
+    function goToOrderPage() {
+    if (cartItems.length > 0) {
+        const productNames = cartItems.map(item => item.name).join(',');
+        const quantities = cartItems.map(item => item.quantity).join(',');
+        const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+        document.getElementById('productNames').value = productNames;
+        document.getElementById('quantities').value = quantities;
+        document.getElementById('total').value = total;
+
+        document.getElementById('orderForm').submit();
+    } else {
+        alert("Your cart is empty! Add some products.");
+    }
+}
+
+</script>
+</body>
+</html>
